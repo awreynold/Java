@@ -7,11 +7,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,32 +27,36 @@ public class CalculatorGUI extends JFrame{
 		
 		JPanel displayPanel = new JPanel();
 		JPanel buttonPanel = new JPanel();
-		JPanel numPadPanel = new JPanel();
-		JPanel displayFunctionPanel = new JPanel();
+		
 		JLabel displayLbl = createDisplayLabel();
 		
-		displayPanel.setLayout(new GridLayout(4, 1));
-		buttonPanel.setLayout(new GridLayout(2, 1));
-		numPadPanel.setLayout(new GridLayout(1, 2));
-		displayFunctionPanel.setLayout(new GridLayout(1, 2));
+		displayPanel.setLayout(new GridLayout(2, 1));
 		
 		displayPanel.add(displayLbl);
 		
-		assembleNumPadPanel(numPadPanel, displayLbl);
-		
-		buttonPanel.add(new JLabel());
-		buttonPanel.add(numPadPanel);
+		buttonPanel = assembleButtonsPanel(displayLbl);
 		
 		panel1.add(displayPanel);
-		panel1.add(numPadPanel);
+		panel1.add(buttonPanel);
 	}
 	
 	private void setProperties() {
 		setTitle("Simplified Calculator");
-		setSize(400, 600);
+		setSize(300, 400);
 		setLayout(new GridLayout(2, 0));
 		setVisible(true);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	}
+	
+	private JPanel assembleButtonsPanel(JLabel displayLbl) {
+		JPanel buttonsPanel = new JPanel();
+		
+		buttonsPanel.setLayout(new GridLayout(2, 1));
+		
+		buttonsPanel.add(assembleFunctionPadPanel(displayLbl));
+		buttonsPanel.add(assembleNumPadPanel(displayLbl));
+		
+		return buttonsPanel;
 	}
 	
 	/**
@@ -63,18 +64,26 @@ public class CalculatorGUI extends JFrame{
 	 * @param numPadPanel JPanel object that contains the number pad buttons 
 	 * @param displayLbl JLabel that displays the users entered data
 	 */
-	private void assembleNumPadPanel(JPanel numPadPanel, JLabel displayLbl) {
-		JPanel numPanel = new JPanel();
-		JPanel operatorPanel = new JPanel();
+	private JPanel assembleNumPadPanel(JLabel displayLbl) {
+		JPanel numPadPanel = new JPanel();
+		numPadPanel.setLayout(new GridLayout(1, 2));
 		
-		numPanel.setLayout(new GridLayout(4, 3)); //layout is 4 rows and 3 columns
-		operatorPanel.setLayout(new GridLayout(4, 1)); //layout is 4 rows and 1 column 
+		NumberPadGUI numPad = new NumberPadGUI();
+		OperatorPadGUI opPad = new OperatorPadGUI();
 		
-		createNumberPad(numPanel, displayLbl);
-		createOperatorPad(operatorPanel, displayLbl);
+		numPadPanel.add(numPad.createNumberPad(displayLbl));
+		numPadPanel.add(opPad.createSimpleOperatorPad(displayLbl));
 		
-		numPadPanel.add(numPanel);
-		numPadPanel.add(operatorPanel);
+		return numPadPanel;
+	}
+	
+	private JPanel assembleFunctionPadPanel(JLabel displayLbl) {
+		JPanel functionPad = new JPanel();
+		
+		CalcFunctionsPadGUI functionPadGUI = new CalcFunctionsPadGUI();
+		functionPad.add(functionPadGUI.createSimplifiedCalcFunctionBtnPad(displayLbl));
+		
+		return functionPad;
 	}
 	
 	private JLabel createDisplayLabel() {
@@ -85,59 +94,5 @@ public class CalculatorGUI extends JFrame{
 		displayLabel.setLocation(0, 0); //sets the location of the label
 		
 		return displayLabel;
-	}
-	
-	private void createNumberPad(JPanel buttonPanel, JLabel displayLbl){
-		String[] numsForBtn = {"7", "8", "9", "4", "5", "6", "1", "2", "3", "0", "."};
-		
-		for(String i : numsForBtn) {
-			JButton btn = new JButton("numBtn" + i);
-			btn.setText(i);
-			
-			//adds the on click action listener for each button created
-			btn.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					displayLbl.setText(displayLbl.getText() + String.valueOf(i));
-					
-				}
-			});
-			buttonPanel.add(btn);	
-		}
-	}
-	
-	private void createOperatorPad(JPanel operatorPanel, JLabel displayLbl) {
-		String[] operators = {"*", "/", "+", "-"};
-		
-		for(String i : operators) {
-			JButton btn = new JButton(i);
-			btn.setText(i);
-			
-			btn.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					
-				}
-			});
-			operatorPanel.add(btn);
-		}
-	}
-	
-	private void createCalcFunctionBtnPad(JPanel calcFunctionaPanel, JLabel displayLbl) {
-		String[] functions = {"clear"};
-		
-		for(String i : functions) {
-			JButton btn = new JButton(i);
-			
-			btn.setText(i);
-			
-			btn.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					
-				}
-			});
-		}
 	}
 }
