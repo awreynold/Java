@@ -4,8 +4,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author awreynold
+ * Utility class that contains methods for interacting with JTable components
  */
 public class TableUtils{
     
