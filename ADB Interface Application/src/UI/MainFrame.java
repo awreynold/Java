@@ -27,8 +27,9 @@ public class MainFrame extends javax.swing.JFrame {
         APKUninstallPanel = new javax.swing.JPanel();
         installPanel = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        lastInstalledTextField1 = new javax.swing.JTextField();
         uninstallPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -39,7 +40,6 @@ public class MainFrame extends javax.swing.JFrame {
         pushPanel = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         lastInstalledTextField = new javax.swing.JTextField();
         pullPanel = new javax.swing.JPanel();
@@ -76,6 +76,14 @@ public class MainFrame extends javax.swing.JFrame {
         logCapFormatCombobox = new javax.swing.JComboBox<>();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        uninstallPanel1 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        packagesTable = new javax.swing.JTable();
+        jLabel13 = new javax.swing.JLabel();
+        updatePackageListBtn = new javax.swing.JButton();
+        forceStopAppBtn = new javax.swing.JButton();
+        clearDataAppBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ADB Interface Application");
@@ -88,10 +96,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButton4.setText("Select APK to Install");
 
-        jButton6.setText("<html>Select Folder of APKs<br>to Install</html>");
-
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Install APKS:");
+
+        jLabel14.setText("Last APK to be installed:");
+
+        lastInstalledTextField1.setEnabled(false);
 
         javax.swing.GroupLayout installPanelLayout = new javax.swing.GroupLayout(installPanel);
         installPanel.setLayout(installPanelLayout);
@@ -100,19 +110,25 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(installPanelLayout.createSequentialGroup()
                 .addGroup(installPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton4)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(0, 104, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(installPanelLayout.createSequentialGroup()
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lastInstalledTextField1))
         );
         installPanelLayout.setVerticalGroup(
             installPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(installPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
-                .addGap(18, 18, 18)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(installPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(lastInstalledTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52))
         );
 
         uninstallPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -155,7 +171,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Uninstall APKs:");
 
-        jButton2.setText("Update Installed Packages List");
+        jButton2.setText("<html>Update Installed<br>Packages List</html>");
 
         javax.swing.GroupLayout uninstallPanelLayout = new javax.swing.GroupLayout(uninstallPanel);
         uninstallPanel.setLayout(uninstallPanelLayout);
@@ -166,7 +182,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(uninstallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         uninstallPanelLayout.setVerticalGroup(
@@ -178,7 +194,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(uninstallPanelLayout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -187,10 +203,10 @@ public class MainFrame extends javax.swing.JFrame {
         APKUninstallPanelLayout.setHorizontalGroup(
             APKUninstallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(APKUninstallPanelLayout.createSequentialGroup()
-                .addGroup(APKUninstallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(installPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(uninstallPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 30, Short.MAX_VALUE))
+                .addGroup(APKUninstallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(uninstallPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(installPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 165, Short.MAX_VALUE))
         );
         APKUninstallPanelLayout.setVerticalGroup(
             APKUninstallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,9 +226,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Push Files:");
 
-        jButton5.setText("<html>Select a Folder of<br>APKs to Install");
-
-        jLabel4.setText("Last APK to be installed:");
+        jLabel4.setText("Last File Pushed:");
 
         lastInstalledTextField.setEnabled(false);
 
@@ -223,15 +237,11 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(pushPanelLayout.createSequentialGroup()
                 .addGroup(pushPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pushPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lastInstalledTextField))
-                    .addGroup(pushPanelLayout.createSequentialGroup()
-                        .addGroup(pushPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
-                            .addComponent(jLabel3)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jButton3)
+                    .addComponent(jLabel3))
                 .addGap(12, 12, 12))
         );
         pushPanelLayout.setVerticalGroup(
@@ -240,8 +250,6 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
-                .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pushPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -268,15 +276,17 @@ public class MainFrame extends javax.swing.JFrame {
             pullPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pullPanelLayout.createSequentialGroup()
                 .addGroup(pullPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pullPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pullFilePathTextField)
-                        .addComponent(jLabel7)
-                        .addComponent(pullToFilePathTextField))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
                     .addComponent(jButton7)
                     .addComponent(jButton8))
-                .addGap(0, 135, Short.MAX_VALUE))
+                .addGap(0, 256, Short.MAX_VALUE))
+            .addGroup(pullPanelLayout.createSequentialGroup()
+                .addGroup(pullPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pullToFilePathTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pullFilePathTextField))
+                .addContainerGap())
         );
         pullPanelLayout.setVerticalGroup(
             pullPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,9 +320,9 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(pushPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
                 .addComponent(pullPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Push/Pull", jPanel1);
@@ -345,7 +355,7 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel8)
-                .addGap(0, 182, Short.MAX_VALUE))
+                .addGap(0, 303, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(screenCapPathTextField)
@@ -450,7 +460,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(logCapOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         logCapOptionsPanelLayout.setVerticalGroup(
             logCapOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -500,6 +510,97 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Log Capture", jPanel4);
 
+        uninstallPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        packagesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Installed Packages"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        packagesTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(packagesTable);
+        packagesTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        if (packagesTable.getColumnModel().getColumnCount() > 0) {
+            packagesTable.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel13.setText("Force Stop/Clear Data:");
+
+        updatePackageListBtn.setText("<html>Update Installed<br>Packages List</html>");
+
+        forceStopAppBtn.setText("<html>Force Stop<br>Selected Application</html>");
+
+        clearDataAppBtn.setText("<html>Clear Data<br>of Selected Application</html>");
+
+        javax.swing.GroupLayout uninstallPanel1Layout = new javax.swing.GroupLayout(uninstallPanel1);
+        uninstallPanel1.setLayout(uninstallPanel1Layout);
+        uninstallPanel1Layout.setHorizontalGroup(
+            uninstallPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(uninstallPanel1Layout.createSequentialGroup()
+                .addGroup(uninstallPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(uninstallPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(uninstallPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(updatePackageListBtn, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(forceStopAppBtn, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(clearDataAppBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        uninstallPanel1Layout.setVerticalGroup(
+            uninstallPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, uninstallPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(uninstallPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(uninstallPanel1Layout.createSequentialGroup()
+                        .addComponent(updatePackageListBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(forceStopAppBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearDataAppBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(uninstallPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 185, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(uninstallPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 269, Short.MAX_VALUE))
+        );
+
+        mainTabbedPane.addTab("Force Stop/Clear Data", jPanel5);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -507,8 +608,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(devicesPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -559,7 +659,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel APKUninstallPanel;
+    private javax.swing.JButton clearDataAppBtn;
     private UI.CustomUIPanels.DevicesPanel devicesPanel1;
+    private javax.swing.JButton forceStopAppBtn;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JPanel imagePanel;
     private javax.swing.JPanel installPanel;
@@ -569,8 +671,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -578,6 +678,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -590,15 +692,19 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField lastInstalledTextField;
+    private javax.swing.JTextField lastInstalledTextField1;
     private javax.swing.JComboBox<String> logCapFormatCombobox;
     private javax.swing.JPanel logCapOptionsPanel;
     private javax.swing.JComboBox<String> logCapPriorityCombobox;
     private javax.swing.JTextArea logOutputTextArea;
     private javax.swing.JTabbedPane mainTabbedPane;
+    private javax.swing.JTable packagesTable;
     private javax.swing.JButton performScreenCapBtn;
     private javax.swing.JButton performScreenRecBtn;
     private javax.swing.JTextField pullFilePathTextField;
@@ -612,5 +718,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton startLogCapBtn;
     private javax.swing.JButton stopLogCapBtn;
     private javax.swing.JPanel uninstallPanel;
+    private javax.swing.JPanel uninstallPanel1;
+    private javax.swing.JButton updatePackageListBtn;
     // End of variables declaration//GEN-END:variables
 }
