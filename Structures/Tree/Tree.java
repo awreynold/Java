@@ -10,7 +10,7 @@ import java.util.List;
 public class Tree {
     
     private String name;
-    private List<TreeNode> nodes;
+    private List<TreeNode> nodes; //first node is the root node
     
     public Tree(String name){
         this.name = name;
